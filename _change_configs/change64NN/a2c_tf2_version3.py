@@ -22,9 +22,9 @@ class Model(tf.keras.Model):
     """
     def __init__(self,num_action):
         super().__init__('mlp_policy')
-        self.hidden_critic = kl.Dense(128,activation='relu')
+        self.hidden_critic = kl.Dense(64,activation='relu')
         self.critic = kl.Dense(1,name='critic_logits') #aka value
-        self.hidden_actor = kl.Dense(128,activation='relu')
+        self.hidden_actor = kl.Dense(64,activation='relu')
         self.actor = kl.Dense(num_action,name='actor_logits') #aka policy
 
 
@@ -63,7 +63,7 @@ class A2CAgent:
         self.GAMMA = 0.99
         self.VALUE_LOSS_FACTOR = 0.5
         self.ENTROPY_FACTOR = 0.0001
-        self.LEARNING_RATE = 0.001
+        self.LEARNING_RATE = 0.01
         self.num_actions = num_actions
         
         self.model = Model(num_action = self.num_actions)
@@ -172,11 +172,13 @@ if __name__ == "__main__":
     #constants
     ENV_NAME = 'LunarLander-v2'
     BATCH_SIZE = 128 
-    UPDATES = 3000 #number of training sessions (updates) in total. 
+    UPDATES = 1000 #number of training sessions (updates) in total. 
     RENDER_EVERY = 20 # render every nth episode
     SAVE_EVERY = 200 # save model every nth episode
     print("BATCH_SIZE = 128 ")
-    print("UPDATES = 3000")
+    print("UPDATES = 1000")
+    print("learning rate = 0.01")
+    print("NN 64 64")
 
     #init env and agent. 
     logging.getLogger().setLevel(logging.INFO)

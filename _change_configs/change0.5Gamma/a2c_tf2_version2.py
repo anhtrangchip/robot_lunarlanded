@@ -60,10 +60,10 @@ class Model(tf.keras.Model):
 
 class A2CAgent:
     def __init__(self,num_actions):
-        self.GAMMA = 0.99
+        self.GAMMA = 0.5
         self.VALUE_LOSS_FACTOR = 0.5
         self.ENTROPY_FACTOR = 0.0001
-        self.LEARNING_RATE = 0.001
+        self.LEARNING_RATE = 0.01
         self.num_actions = num_actions
         
         self.model = Model(num_action = self.num_actions)
@@ -172,11 +172,12 @@ if __name__ == "__main__":
     #constants
     ENV_NAME = 'LunarLander-v2'
     BATCH_SIZE = 128 
-    UPDATES = 3000 #number of training sessions (updates) in total. 
+    UPDATES = 800 #number of training sessions (updates) in total. 
     RENDER_EVERY = 20 # render every nth episode
     SAVE_EVERY = 200 # save model every nth episode
     print("BATCH_SIZE = 128 ")
-    print("UPDATES = 3000")
+    print("UPDATES = 1000")
+    print("learning rate = 0.01")
 
     #init env and agent. 
     logging.getLogger().setLevel(logging.INFO)

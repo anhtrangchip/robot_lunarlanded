@@ -1,0 +1,162 @@
+(pybox2d) anhtrangchip@anhtrangchip-Inspiron-7577:~/code/Robotic/A2C_TF2.0_Keras_LunarLander-master/test_change/changeNN$ python a2c_tf2_version3.py 
+2.2.0
+BATCH_SIZE = 128 
+UPDATES = 1000
+learning rate = 0.01
+NN 64 64
+2020-06-17 21:12:33.952272: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-06-17 21:12:33.979716: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:981] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2020-06-17 21:12:33.980356: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1561] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: GeForce GTX 1060 with Max-Q Design computeCapability: 6.1
+coreClock: 1.3415GHz coreCount: 10 deviceMemorySize: 5.94GiB deviceMemoryBandwidth: 178.99GiB/s
+2020-06-17 21:12:33.980816: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.1
+2020-06-17 21:12:33.982689: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10
+2020-06-17 21:12:33.984556: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10
+2020-06-17 21:12:33.984910: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10
+2020-06-17 21:12:33.986712: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10
+2020-06-17 21:12:33.987750: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10
+2020-06-17 21:12:33.988038: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcudnn.so.7'; dlerror: libcudnn.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/ros/melodic/lib
+2020-06-17 21:12:33.988063: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1598] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2020-06-17 21:12:33.988299: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-17 21:12:34.017900: I tensorflow/core/platform/profile_utils/cpu_utils.cc:102] CPU Frequency: 2499950000 Hz
+2020-06-17 21:12:34.018151: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f3eb0000b20 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-06-17 21:12:34.018168: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2020-06-17 21:12:34.019828: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1102] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-06-17 21:12:34.019869: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1108]      
+INFO:root:Episode: 9, Reward: -378.34579582090646, UPDATE: 5, Step: 97
+INFO:root:Episode: 19, Reward: -458.57320003632697, UPDATE: 11, Step: 90
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_19.gif
+INFO:root:Episode: 29, Reward: -325.0626636655643, UPDATE: 17, Step: 4
+INFO:root:Episode: 39, Reward: -431.07291041734845, UPDATE: 24, Step: 113
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_39.gif
+INFO:root:Episode: 49, Reward: -324.86303821452947, UPDATE: 31, Step: 103
+INFO:root:Episode: 59, Reward: -145.52513906235055, UPDATE: 38, Step: 103
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_59.gif
+INFO:root:Episode: 69, Reward: -318.4388240538939, UPDATE: 45, Step: 99
+INFO:root:Episode: 79, Reward: -373.0871004818964, UPDATE: 53, Step: 69
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_79.gif
+INFO:root:Episode: 89, Reward: -300.4228145254359, UPDATE: 61, Step: 83
+INFO:root:Episode: 99, Reward: -176.61104574949607, UPDATE: 71, Step: 113
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_99.gif
+INFO:root:Episode: 109, Reward: -151.63761889235084, UPDATE: 82, Step: 18
+INFO:root:Episode: 119, Reward: -116.33658885690397, UPDATE: 90, Step: 48
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_119.gif
+INFO:root:Episode: 129, Reward: -119.09877299205593, UPDATE: 97, Step: 25
+INFO:root:Episode: 139, Reward: -92.3612397105505, UPDATE: 104, Step: 47
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_139.gif
+INFO:root:Episode: 149, Reward: -100.26524475010723, UPDATE: 111, Step: 10
+INFO:root:Episode: 159, Reward: -74.39203700954214, UPDATE: 120, Step: 74
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_159.gif
+INFO:root:Episode: 169, Reward: -60.7381967475376, UPDATE: 129, Step: 112
+INFO:root:Episode: 179, Reward: -76.49943382851546, UPDATE: 139, Step: 35
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_179.gif
+INFO:root:Episode: 189, Reward: -70.52045914668025, UPDATE: 147, Step: 58
+INFO:root:Episode: 199, Reward: -56.775556170511436, UPDATE: 158, Step: 59
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_199.gif
+2020-06-17 21:23:33.638605: W tensorflow/python/util/util.cc:329] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+WARNING:tensorflow:From /home/anhtrangchip/anaconda3/envs/pybox2d/lib/python3.6/site-packages/tensorflow/python/ops/resource_variable_ops.py:1817: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+WARNING:tensorflow:From /home/anhtrangchip/anaconda3/envs/pybox2d/lib/python3.6/site-packages/tensorflow/python/ops/resource_variable_ops.py:1817: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+INFO:tensorflow:Assets written to: model/sub_model_199/assets
+INFO:tensorflow:Assets written to: model/sub_model_199/assets
+INFO:root:Episode: 209, Reward: -46.74920643905053, UPDATE: 169, Step: 55
+INFO:root:Episode: 219, Reward: -43.11898236930138, UPDATE: 181, Step: 78
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_219.gif
+INFO:root:Episode: 229, Reward: -34.71998440045216, UPDATE: 190, Step: 22
+INFO:root:Episode: 239, Reward: -18.33164565423401, UPDATE: 206, Step: 35
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_239.gif
+INFO:root:Episode: 249, Reward: -50.14708339423362, UPDATE: 248, Step: 106
+INFO:root:Episode: 259, Reward: -63.393028529142384, UPDATE: 278, Step: 90
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_259.gif
+INFO:root:Episode: 269, Reward: -64.13275684647559, UPDATE: 285, Step: 27
+INFO:root:Episode: 279, Reward: -31.06012311055037, UPDATE: 308, Step: 127
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_279.gif
+INFO:root:Episode: 289, Reward: -474.9628013249718, UPDATE: 318, Step: 54
+INFO:root:Episode: 299, Reward: -569.6398398845648, UPDATE: 329, Step: 66
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_299.gif
+INFO:root:Episode: 309, Reward: -260.24213639390894, UPDATE: 343, Step: 66
+INFO:root:Episode: 319, Reward: -10.214139516801833, UPDATE: 375, Step: 100
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_319.gif
+INFO:root:Episode: 329, Reward: -72.2534317613004, UPDATE: 390, Step: 71
+INFO:root:Episode: 339, Reward: -67.236250979795, UPDATE: 420, Step: 46
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_339.gif
+INFO:root:Episode: 349, Reward: -115.67795424113487, UPDATE: 437, Step: 12
+^[[B^[[B^[[BINFO:root:Episode: 359, Reward: -84.3142930923046, UPDATE: 464, Step: 64
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_359.gif
+INFO:root:Episode: 369, Reward: -4.6739991033172315, UPDATE: 500, Step: 11
+INFO:root:Episode: 379, Reward: 101.90457961779575, UPDATE: 543, Step: 79
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_379.gif
+INFO:root:Episode: 389, Reward: 39.694393034724634, UPDATE: 592, Step: 55
+INFO:root:Episode: 399, Reward: -11.896154739392626, UPDATE: 632, Step: 122
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_399.gif
+INFO:tensorflow:Assets written to: model/sub_model_399/assets
+INFO:tensorflow:Assets written to: model/sub_model_399/assets
+INFO:root:Episode: 409, Reward: 89.88119094163353, UPDATE: 677, Step: 96
+INFO:root:Episode: 419, Reward: 36.652077887324495, UPDATE: 699, Step: 30
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_419.gif
+INFO:root:Episode: 429, Reward: -20.35776882895293, UPDATE: 705, Step: 19
+INFO:root:Episode: 439, Reward: -26.6626106753155, UPDATE: 711, Step: 89
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_439.gif
+INFO:root:Episode: 449, Reward: -40.536352213531025, UPDATE: 717, Step: 94
+INFO:root:Episode: 459, Reward: 33.54264783560052, UPDATE: 733, Step: 18
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_459.gif
+INFO:root:Episode: 469, Reward: -2.3940651179121204, UPDATE: 739, Step: 113
+INFO:root:Episode: 479, Reward: 13.944963116956426, UPDATE: 748, Step: 108
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_479.gif
+INFO:root:Episode: 489, Reward: 17.52918720812224, UPDATE: 758, Step: 70
+INFO:root:Episode: 499, Reward: -56.73259922488472, UPDATE: 777, Step: 22
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_499.gif
+INFO:root:Episode: 509, Reward: 18.8027908605951, UPDATE: 819, Step: 76
+INFO:root:Episode: 519, Reward: -84.52125925330702, UPDATE: 829, Step: 39
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_519.gif
+INFO:root:Episode: 529, Reward: -15.761188793041736, UPDATE: 845, Step: 109
+INFO:root:Episode: 539, Reward: 2.0116415679664343, UPDATE: 859, Step: 54
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_539.gif
+INFO:root:Episode: 549, Reward: 22.95811303197882, UPDATE: 879, Step: 36
+INFO:root:Episode: 559, Reward: 9.815447043970952, UPDATE: 891, Step: 123
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_559.gif
+INFO:root:Episode: 569, Reward: 7.0465152267037325, UPDATE: 904, Step: 14
+INFO:root:Episode: 579, Reward: 107.32157340140876, UPDATE: 918, Step: 76
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_579.gif
+INFO:root:Episode: 589, Reward: -83.20878013909928, UPDATE: 940, Step: 74
+INFO:root:Episode: 599, Reward: 6.665287334291794, UPDATE: 985, Step: 89
+INFO:matplotlib.animation:Animation.save using <class 'matplotlib.animation.ImageMagickWriter'>
+INFO:matplotlib.animation:MovieWriter._run: running command: convert -size 600x400 -depth 8 -delay 1.6666666666666667 -loop 0 rgba:- ./gif/lunarlanded_ep_599.gif
+INFO:tensorflow:Assets written to: model/sub_model_599/assets
+INFO:tensorflow:Assets written to: model/sub_model_599/assets
+INFO:tensorflow:Assets written to: final_model/assets
+INFO:tensorflow:Assets written to: final_model/assets
+Finished training.
