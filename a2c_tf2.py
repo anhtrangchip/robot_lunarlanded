@@ -148,9 +148,9 @@ class A2CAgent:
         """
         return self.model.get_action_value(state)
 
-def save_frames_as_gif(frames, path='./', filename='gym_animation.gif', episode = '0'):
+def save_frames_as_gif(frames, path='./gif/', filename='gym_animation.gif', episode = '0'):
     #add episode to file name
-    filename = 'gym_animation_'+str(episode)+'.gif'
+    filename = 'lunarlanded_ep_'+str(episode)+'.gif'
 
     #Mess with this to change frame size
     plt.figure(figsize=(frames[0].shape[1] / 72.0, frames[0].shape[0] / 72.0), dpi=72)
@@ -163,6 +163,7 @@ def save_frames_as_gif(frames, path='./', filename='gym_animation.gif', episode 
 
     anim = animation.FuncAnimation(plt.gcf(), animate, frames = len(frames), interval=50)
     anim.save(path + filename, writer='imagemagick', fps=60)
+    plt.close()
 
 
 if __name__ == "__main__":
@@ -171,6 +172,7 @@ if __name__ == "__main__":
     BATCH_SIZE = 128 
     UPDATES = 3000 #number of training sessions (updates) in total. 
     RENDER_EVERY = 20 # render every nth episode
+    SAVE_EVERY = 200 # save model every nth episode
 
     #init env and agent. 
     logging.getLogger().setLevel(logging.INFO)
@@ -205,9 +207,11 @@ if __name__ == "__main__":
                         break
                 env.close()
                 
-                save_frames_as_gif(framesb, filename='gym_animation_.gif', episode = len(episode_reward_lst)-1)
+                save_frames_as_gif(framesb, filename='lunarlanded_ep_.gif', episode = len(episode_reward_lst)-1)
 
-
+            #save model
+            if len(episode_reward_lst) % SAVE_EVERY == 0:
+                agent.model.save('model/sub_model_'+str(len(episode_reward_lst)-1))
 
             next_state, rewards[step], dones[step], _ = env.step(actions[step])
             episode_reward_lst[-1] += rewards[step]
@@ -215,9 +219,11 @@ if __name__ == "__main__":
                 episode_reward_lst.append(0.0)
                 next_state = env.reset()
                 if len(episode_reward_lst) % 10 == 0:
-                    logging.info(f"Episode: {len(episode_reward_lst)-1}, Reward: {np.mean(episode_reward_lst[-12:-2])}")
+                    logging.info(f"Episode: {len(episode_reward_lst)-1}, Reward: {np.mean(episode_reward_lst[-12:-2])}, UPDATE: {update}")
         agent.train(states, state_values,actions,rewards,dones,next_state)
-            
+               
+
+    agent.model.save('final_model')
     print("Finished training.")
     #make simple moving average over 50 episodes (smoothing) and plot
     SMA_rewards = np.convolve(episode_reward_lst, np.ones((50,))/50, mode='valid')
@@ -226,6 +232,5 @@ if __name__ == "__main__":
     plt.xlabel('Episode')
     plt.ylabel('Total Reward')
     plt.show()
-
 
 #%%
