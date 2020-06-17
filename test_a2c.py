@@ -1,8 +1,3 @@
-"""This is another TF2.0 Keras implementation of a A2C agent (tested for openai lunar lander v2)
-In this version, a very different model definition was used employing a Keras.Model subclass.
-The idea is from: https://medium.com/@Inoryy/deep-reinforcement-learning-with-tensorflow-2-0-d8e62102680d
-"""
-#%%
 import numpy as np
 import gym
 import logging
@@ -11,10 +6,9 @@ import matplotlib.pyplot as plt
 import tensorflow.keras.layers as kl
 import tensorflow.keras.losses as kls
 import tensorflow.keras.optimizers as ko
+from tensorflow import keras
 
-from matplotlib import animation
-
-class Model(tf.keras.Model):
+class CustomModel(tf.keras.Model):
     """Define the Actor Critic Model.
     This inherits from keras.Model. All layers should be defined in __init__.
     The forward pass is then defined in call() 
@@ -41,7 +35,7 @@ class Model(tf.keras.Model):
         return self.actor(hidden_actor), self.critic(hidden_critic)
     
 
-    def get_action_value(self, state):
+    def get_action_value2(self, state):
         """Return the cation (from actor) and the value of the state(critic)
         This is the communication with the outer world: Given a state it 
         will return a action (probabilistic) and a state value estimate.
@@ -55,9 +49,6 @@ class Model(tf.keras.Model):
         action = tf.random.categorical(actor, 1) #for eager mode only
         return np.squeeze(action,axis=-1), np.squeeze(critic,axis=-1)
 
-    
-    
-
 class A2CAgent:
     def __init__(self,num_actions):
         self.GAMMA = 0.99
@@ -66,7 +57,7 @@ class A2CAgent:
         self.LEARNING_RATE = 0.001
         self.num_actions = num_actions
         
-        self.model = Model(num_action = self.num_actions)
+        self.model = CustomModel(num_action = self.num_actions)
         self.model.compile(
             optimizer = ko.RMSprop(lr=self.LEARNING_RATE),
             loss = [self._actor_loss, self._critic_loss]
@@ -79,7 +70,7 @@ class A2CAgent:
         The critic requires a state as input and just the returns to calculate the loss.
         """
         #generate discounted rewards (returns) and advantages
-        _, next_state_value = self.model.get_action_value(next_state[None,:])
+        _, next_state_value = self.model.get_action_value2(next_state[None,:])
         returns,advantages = self._returns_advantages(rewards,dones,state_values,next_state_value)
         #concateneate. A trick to use "default" loss definition. Alternativly, a loss
         #function would need to be encapsuled inside another loss function if it uses more than
@@ -146,28 +137,11 @@ class A2CAgent:
         agent <--> env only communication without cross references to the model underlying 
         the agent.
         """
-        return self.model.get_action_value(state)
-
-def save_frames_as_gif(frames, path='./gif/', filename='gym_animation.gif', episode = '0'):
-    #add episode to file name
-    filename = 'lunarlanded_ep_'+str(episode)+'.gif'
-
-    #Mess with this to change frame size
-    plt.figure(figsize=(frames[0].shape[1] / 72.0, frames[0].shape[0] / 72.0), dpi=72)
-
-    patch = plt.imshow(frames[0])
-    plt.axis('off')
-
-    def animate(i):
-        patch.set_data(frames[i])
-
-    anim = animation.FuncAnimation(plt.gcf(), animate, frames = len(frames), interval=50)
-    anim.save(path + filename, writer='imagemagick', fps=60)
-    plt.close()
-
+        return self.model.get_action_value2(state)
 
 if __name__ == "__main__":
     print(tf.version.VERSION)
+    print(keras.__version__)
 
     #constants
     ENV_NAME = 'LunarLander-v2'
@@ -175,8 +149,6 @@ if __name__ == "__main__":
     UPDATES = 3000 #number of training sessions (updates) in total. 
     RENDER_EVERY = 20 # render every nth episode
     SAVE_EVERY = 200 # save model every nth episode
-    print("BATCH_SIZE = 128 ")
-    print("UPDATES = 3000")
 
     #init env and agent. 
     logging.getLogger().setLevel(logging.INFO)
@@ -184,20 +156,21 @@ if __name__ == "__main__":
     agent = A2CAgent(env.action_space.n)
 
     #init variabls for the training loops
-    states  = np.zeros((BATCH_SIZE, env.observation_space.shape[0])) # 
+    states  = np.zeros((BATCH_SIZE, env.observation_space.shape[0]))
     actions = np.zeros(BATCH_SIZE, dtype=np.int32)
     rewards = np.zeros(BATCH_SIZE)
     dones   = np.zeros(BATCH_SIZE)
     state_values  = np.zeros(BATCH_SIZE)
     episode_reward_lst = [0.0]
     next_state = env.reset()
+
     #loop though N training steps
-    for update in range(UPDATES):
+    for update in range(1):
         #gather BATCH_SIZE trajectories (SARS' paris)
-        for step in range(BATCH_SIZE):
+        for step in range(8):
             states[step] = next_state.copy()
             actions[step], state_values[step] = agent.get_action_value(next_state[None, :])
-            if len(episode_reward_lst) % RENDER_EVERY == 0: 
+            if len(episode_reward_lst) % 1 == 0: 
                 env.render()
                 #save gif file
                 framesb = []
@@ -211,31 +184,117 @@ if __name__ == "__main__":
                         break
                 env.close()
                 
-                save_frames_as_gif(framesb, filename='lunarlanded_ep_.gif', episode = len(episode_reward_lst)-1)
+                # save_frames_as_gif(framesb, filename='lunarlanded_ep_.gif', episode = len(episode_reward_lst)-1)
 
             #save model
-            if len(episode_reward_lst) % SAVE_EVERY == 0:
-                agent.model.save('model/sub_model_'+str(len(episode_reward_lst)-1))
+            #if len(episode_reward_lst) % SAVE_EVERY == 0:
+            #    agent.model.save('model/sub_model_'+str(len(episode_reward_lst)-1))
 
             next_state, rewards[step], dones[step], _ = env.step(actions[step])
             episode_reward_lst[-1] += rewards[step]
             if dones[step]:
-                # print("Episode ", update, "Step ", step)
                 episode_reward_lst.append(0.0)
                 next_state = env.reset()
                 if len(episode_reward_lst) % 10 == 0:
-                    logging.info(f"Episode: {len(episode_reward_lst)-1}, Reward: {np.mean(episode_reward_lst[-12:-2])}, UPDATE: {update}, Step: {step}")
+                    logging.info(f"Episode: {len(episode_reward_lst)-1}, Reward: {np.mean(episode_reward_lst[-12:-2])}, UPDATE: {update}")
         agent.train(states, state_values,actions,rewards,dones,next_state)
                
-
-    agent.model.save('final_model')
+    
+    agent.model.save('test_model')
     print("Finished training.")
-    #make simple moving average over 50 episodes (smoothing) and plot
-    SMA_rewards = np.convolve(episode_reward_lst, np.ones((50,))/50, mode='valid')
-    plt.style.use('seaborn')
-    plt.plot(SMA_rewards)
-    plt.xlabel('Episode')
-    plt.ylabel('Total Reward')
-    plt.show()
+    agent.model.summary(line_length=None, positions=None, print_fn=None)
+    
+    # del agent
 
-#%%
+    agent2 = A2CAgent(env.action_space.n)
+
+    # tf 2.2.0
+    # agent.model = keras.models.load_model('test_model', custom_objects={'_actor_loss': agent._actor_loss, '_critic_loss': agent._critic_loss})
+
+    # tf 2.0.0
+    agent2.model = keras.models.load_model('test_model', compile=False)
+    agent2.model.compile(
+            optimizer = ko.RMSprop(lr=agent2.LEARNING_RATE),
+            loss = [agent2._actor_loss, agent2._critic_loss]
+        )
+    
+    print("Loaded model:", agent2.model)
+    agent.model.summary(line_length=None, positions=None, print_fn=None)
+
+    # states  = np.zeros((8, env.observation_space.shape[0]))
+    # actions = np.zeros(8, dtype=np.int32)
+    # rewards = np.zeros(8)
+    # dones   = np.zeros(8)
+    # state_values  = np.zeros(8)
+    # episode_reward_lst = [0.0]
+    # next_state = env.reset()
+
+    # for update in range(1):
+    #     #gather BATCH_SIZE trajectories (SARS' paris)
+    #     for step in range(8):
+    #         states[step] = next_state.copy()
+    #         actions[step], state_values[step] = agent2.get_action_value(next_state[None, :])
+    #         if len(episode_reward_lst) % 1 == 0: 
+    #             env.render()
+    #             # #save gif file
+    #             # framesb = []
+    #             # env.render()
+    #             # for t in range(1000):
+    #             #     #Render to frames buffer
+    #             #     framesb.append(env.render(mode="rgb_array"))
+    #             #     action = env.action_space.sample()
+    #             #     _, _, done, _ = env.step(action)
+    #             #     if done:
+    #             #         break
+    #             # env.close()
+                
+    #             # save_frames_as_gif(framesb, filename='lunarlanded_ep_.gif', episode = len(episode_reward_lst)-1)
+
+    #         next_state, rewards[step], dones[step], _ = env.step(actions[step])
+    #         episode_reward_lst[-1] += rewards[step]
+    #         logging.info(f"Episode: {len(episode_reward_lst)-1}, Reward: {np.mean(episode_reward_lst[-12:-2])}, UPDATE: {update}")
+
+    states  = np.zeros((BATCH_SIZE, env.observation_space.shape[0]))
+    actions = np.zeros(BATCH_SIZE, dtype=np.int32)
+    rewards = np.zeros(BATCH_SIZE)
+    dones   = np.zeros(BATCH_SIZE)
+    state_values  = np.zeros(BATCH_SIZE)
+    episode_reward_lst = [0.0]
+    next_state = env.reset()
+
+    #loop though N training steps
+    for update in range(1):
+        #gather BATCH_SIZE trajectories (SARS' paris)
+        for step in range(8):
+            states[step] = next_state.copy()
+            actions[step], state_values[step] = agent.get_action_value(next_state[None, :])
+            if len(episode_reward_lst) % 1 == 0: 
+                env.render()
+                #save gif file
+                framesb = []
+                env.render()
+                for t in range(1000):
+                    #Render to frames buffer
+                    framesb.append(env.render(mode="rgb_array"))
+                    action = env.action_space.sample()
+                    _, _, done, _ = env.step(action)
+                    if done:
+                        break
+                env.close()
+                
+                # save_frames_as_gif(framesb, filename='lunarlanded_ep_.gif', episode = len(episode_reward_lst)-1)
+
+            #save model
+            #if len(episode_reward_lst) % SAVE_EVERY == 0:
+            #    agent.model.save('model/sub_model_'+str(len(episode_reward_lst)-1))
+
+            next_state, rewards[step], dones[step], _ = env.step(actions[step])
+            episode_reward_lst[-1] += rewards[step]
+            if dones[step]:
+                episode_reward_lst.append(0.0)
+                next_state = env.reset()
+                if len(episode_reward_lst) % 10 == 0:
+                    logging.info(f"Episode: {len(episode_reward_lst)-1}, Reward: {np.mean(episode_reward_lst[-12:-2])}, UPDATE: {update}")
+        agent.train(states, state_values,actions,rewards,dones,next_state)
+
+
