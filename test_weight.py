@@ -147,10 +147,8 @@ if __name__ == "__main__":
     ENV_NAME = 'LunarLander-v2'
     BATCH_SIZE = 128 
     UPDATES = 3000 #number of training sessions (updates) in total. 
-    RENDER_EVERY = 20 # render every nth episode
-    SAVE_EVERY = 200 # save model every nth episode
 
-    #init env and agent. 
+    # init env and agent. 
     logging.getLogger().setLevel(logging.INFO)
     env = gym.make(ENV_NAME)
 
@@ -164,28 +162,19 @@ if __name__ == "__main__":
     episode_reward_lst = [0.0]
     next_state = env.reset()
 
-    # inittial model structure 
+    # initialize model structure 
     for update in range(1):
         #gather BATCH_SIZE trajectories (SARS' paris)
         for step in range(1):
             states[step] = next_state.copy()
             actions[step], state_values[step] = agent2.get_action_value(next_state[None, :])
-            if len(episode_reward_lst) % 1 == 0: 
-                env.render()
-
             next_state, rewards[step], dones[step], _ = env.step(actions[step])
             episode_reward_lst[-1] += rewards[step]
-            if dones[step]:
-                episode_reward_lst.append(0.0)
-                next_state = env.reset()
-                if len(episode_reward_lst) % 10 == 0:
-                    logging.info(f"Episode: {len(episode_reward_lst)-1}, Reward: {np.mean(episode_reward_lst[-12:-2])}, UPDATE: {update}")
         agent2.train(states, state_values,actions,rewards,dones,next_state)
 
     # LOAD MODEL WEIGHT 
-    agent2.model.load_weights('final_model/final_model_weight.h5')
+    agent2.model.load_weights('final_model_weight2.h5')
     print("Loaded model:", agent2.model)
-    # agent2.model.summary(line_length=None, positions=None, print_fn=None)
     
     states  = np.zeros((BATCH_SIZE, env.observation_space.shape[0]))
     actions = np.zeros(BATCH_SIZE, dtype=np.int32)
@@ -194,41 +183,42 @@ if __name__ == "__main__":
     state_values  = np.zeros(BATCH_SIZE)
     episode_reward_lst = [0.0]
     next_state = env.reset()
+    n = 0
+    while True:
+        print("hehe")
+        if n==0:
+            break
 
-    # testing loop though N training steps
-    for update in range(5):
-        #gather BATCH_SIZE trajectories (SARS' paris)
+    while True:
         for step in range(128):
             states[step] = next_state.copy()
             actions[step], state_values[step] = agent2.get_action_value(next_state[None, :])
             if len(episode_reward_lst) % 1 == 0: 
                 env.render()
-                # #save gif file
-                # framesb = []
-                # env.render()
-                # for t in range(1000):
-                #     #Render to frames buffer
-                #     framesb.append(env.render(mode="rgb_array"))
-                #     action = env.action_space.sample()
-                #     _, _, done, _ = env.step(action)
-                #     if done:
-                #         break
-                # env.close()
-                # save_frames_as_gif(framesb, filename='lunarlanded_ep_.gif', episode = len(episode_reward_lst)-1)
 
             next_state, rewards[step], dones[step], _ = env.step(actions[step])
             # print(rewards[step])
             episode_reward_lst[-1] += rewards[step]
+            # print(actions[step])
+            # print(env.step(actions[step]))
             if dones[step]:
+                print("done")
+                print(episode_reward_lst[-1], " ", dones[step])
+                print(env.step(actions[step]))
                 episode_reward_lst.append(0.0)
                 next_state = env.reset()
-                if len(episode_reward_lst) % 10 == 0:
-                    logging.info(f"Episode: {len(episode_reward_lst)-1}, Reward: {np.mean(episode_reward_lst[-12:-2])}, UPDATE: {update}")
+                n+=1
+                print("end time ", n)
+                break 
+        if n>5:
+            print("end") 
+            break
 
+        
     #make simple moving average over 50 episodes (smoothing) and plot
-    SMA_rewards = np.convolve(episode_reward_lst, np.ones((50,))/50, mode='valid')
+    # SMA_rewards = np.convolve(episode_reward_lst, mode='valid')
     plt.style.use('seaborn')
-    plt.plot(SMA_rewards)
+    plt.plot(episode_reward_lst)
     plt.xlabel('Episode')
     plt.ylabel('Total Reward')
     plt.show()
