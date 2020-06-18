@@ -1,0 +1,403 @@
+Loaded model: <__main__.Model object at 0x7fd39841b908>
+
+done time  0  reward:  235.6324037458514
+
+done time  1  reward:  -23.914927318202004
+
+done time  2  reward:  207.45812805148418
+
+done time  3  reward:  279.73133400636095
+
+done time  4  reward:  12.000894178656097
+
+done time  5  reward:  224.44562715686692
+
+done time  6  reward:  -25.07883481212329
+
+done time  7  reward:  221.95603666825755
+
+done time  8  reward:  242.63540072902637
+
+done time  9  reward:  250.92375628161278
+
+done time  10  reward:  237.81155684045686
+
+done time  11  reward:  254.55227720077798
+
+done time  12  reward:  227.28979172545866
+
+done time  13  reward:  -62.66982386437384
+
+done time  14  reward:  235.64740248986632
+
+done time  15  reward:  -2.533984398431187
+
+done time  16  reward:  241.66732861650027
+
+done time  17  reward:  17.804591608796642
+
+done time  18  reward:  244.3441001160166
+
+done time  19  reward:  5.848980162020169
+
+done time  20  reward:  239.1132423001439
+
+done time  21  reward:  277.4982281214835
+
+done time  22  reward:  232.78139997201208
+
+done time  23  reward:  -38.875220275962675
+
+done time  24  reward:  238.5482889769551
+
+done time  25  reward:  247.042528745541
+
+done time  26  reward:  284.1579360717177
+
+done time  27  reward:  241.28691530250381
+
+done time  28  reward:  238.21580554040526
+
+done time  29  reward:  294.15425254412105
+
+done time  30  reward:  221.59795790333607
+
+done time  31  reward:  244.02960265865465
+
+done time  32  reward:  269.93031587909593
+
+done time  33  reward:  257.8690278492669
+
+done time  34  reward:  265.94118129186927
+
+done time  35  reward:  199.92410824254392
+
+done time  36  reward:  280.61073236123104
+
+done time  37  reward:  259.9525829478386
+
+done time  38  reward:  246.9389653077355
+
+done time  39  reward:  3.8912068226851346
+
+done time  40  reward:  267.7714398111908
+
+done time  41  reward:  207.24209893643024
+
+done time  42  reward:  226.3715472406813
+
+done time  43  reward:  271.89510276484543
+
+done time  44  reward:  -31.22739101050152
+
+done time  45  reward:  216.28033059865479
+
+done time  46  reward:  249.08932316213972
+
+done time  47  reward:  6.109049036842364
+
+done time  48  reward:  214.76440738064687
+
+done time  49  reward:  -147.98923626808062
+
+done time  50  reward:  258.52801789533123
+
+done time  51  reward:  223.39185531973533
+
+done time  52  reward:  235.1967477863962
+
+done time  53  reward:  -23.870113011477486
+
+done time  54  reward:  262.01027589932124
+
+done time  55  reward:  228.00680108399717
+
+done time  56  reward:  205.88194896665524
+
+done time  57  reward:  225.6905630961389
+
+done time  58  reward:  244.03638698642283
+
+done time  59  reward:  -7.125382630858326
+
+done time  60  reward:  194.7585200122118
+
+done time  61  reward:  263.05932035669986
+
+done time  62  reward:  293.84038357755196
+
+done time  63  reward:  259.8966708968002
+
+done time  64  reward:  -41.18783123854571
+
+done time  65  reward:  259.6021350537592
+
+done time  66  reward:  218.291561086772
+
+done time  67  reward:  245.67660828368565
+
+done time  68  reward:  29.176627510201882
+
+done time  69  reward:  9.035099720636254
+
+done time  70  reward:  194.67385305215018
+
+done time  71  reward:  5.343276518776975
+
+done time  72  reward:  245.618471460342
+
+done time  73  reward:  -81.82140503064187
+
+done time  74  reward:  6.629576745830178
+
+done time  75  reward:  232.77024608951137
+
+done time  76  reward:  230.19678422852687
+
+done time  77  reward:  237.62803396650736
+
+done time  78  reward:  232.8180819961495
+
+done time  79  reward:  236.73934301485002
+
+done time  80  reward:  8.447345967301345
+
+done time  81  reward:  269.1634136018821
+
+done time  82  reward:  -28.00406156863916
+
+done time  83  reward:  23.51965355685462
+
+done time  84  reward:  0.41048316472242163
+
+done time  85  reward:  235.7439513838746
+
+done time  86  reward:  246.85888936275435
+
+done time  87  reward:  222.69057700414
+
+done time  88  reward:  260.3577710993767
+
+done time  89  reward:  291.3007055458706
+
+done time  90  reward:  219.76714412554364
+
+done time  91  reward:  221.7263922752433
+
+done time  92  reward:  244.4727811593743
+
+done time  93  reward:  -1.6799965151822107
+
+done time  94  reward:  2.3754819149343405
+
+done time  95  reward:  -5.504232093340846
+
+done time  96  reward:  13.353900633933648
+
+done time  97  reward:  237.740272091665
+
+done time  98  reward:  209.70383122561145
+
+done time  99  reward:  221.09560201595463
+
+done time  100  reward:  -3.4284472480278936
+
+done time  101  reward:  -45.188748322163285
+
+done time  102  reward:  -85.80940208925188
+
+done time  103  reward:  283.014646644203
+
+done time  104  reward:  21.125866083684926
+
+done time  105  reward:  256.52642725929405
+
+done time  106  reward:  228.37611435472337
+
+done time  107  reward:  224.35427942136573
+
+done time  108  reward:  227.9550769270513
+
+done time  109  reward:  296.585958862065
+
+done time  110  reward:  253.7496976703906
+
+done time  111  reward:  6.937426991412778
+
+done time  112  reward:  8.693515277287105
+
+done time  113  reward:  1.8991861699651622
+
+done time  114  reward:  41.46233767499865
+
+done time  115  reward:  276.49854559557076
+
+done time  116  reward:  259.23496969380506
+
+done time  117  reward:  228.68215878287592
+
+done time  118  reward:  239.1903483432195
+
+done time  119  reward:  248.11467854089966
+
+done time  120  reward:  -3.0827664084433763
+
+done time  121  reward:  -45.5137617762619
+
+done time  122  reward:  245.3321873875017
+
+done time  123  reward:  253.75513770228923
+
+done time  124  reward:  -11.050354619291554
+
+done time  125  reward:  232.0225701980621
+
+done time  126  reward:  218.4933111148194
+
+done time  127  reward:  232.44286697862862
+
+done time  128  reward:  -4.689683540248794
+
+done time  129  reward:  132.13339357834369
+
+done time  130  reward:  14.825930952360352
+
+done time  131  reward:  224.4682728605609
+
+done time  132  reward:  9.291375084042357
+
+done time  133  reward:  259.6245022517251
+
+done time  134  reward:  -26.118911000896645
+
+done time  135  reward:  145.2436741194743
+
+done time  136  reward:  -39.085053110697146
+
+done time  137  reward:  191.60508729407917
+
+done time  138  reward:  -17.86338854611985
+
+done time  139  reward:  244.37609044166615
+
+done time  140  reward:  255.22039387969582
+
+done time  141  reward:  258.5938522501483
+
+done time  142  reward:  218.90550930196576
+
+done time  143  reward:  259.13383592030954
+
+done time  144  reward:  234.97512238418525
+
+done time  145  reward:  215.08824669748694
+
+done time  146  reward:  220.44958208690244
+
+done time  147  reward:  -17.392121962247003
+
+done time  148  reward:  -34.74229358530445
+
+done time  149  reward:  -35.60496145887768
+
+done time  150  reward:  269.064161694474
+
+done time  151  reward:  245.9191694229656
+
+done time  152  reward:  228.87811596907252
+
+done time  153  reward:  224.56884011930495
+
+done time  154  reward:  222.35275788613572
+
+done time  155  reward:  275.9989029727109
+
+done time  156  reward:  34.820180845933805
+
+done time  157  reward:  272.3973700831224
+
+done time  158  reward:  236.14303928459972
+
+done time  159  reward:  209.1485913281552
+
+done time  160  reward:  11.8377321986775
+
+done time  161  reward:  241.00953034149865
+
+done time  162  reward:  211.22691835618951
+
+done time  163  reward:  267.9106187909895
+
+done time  164  reward:  265.96774145479014
+
+done time  165  reward:  239.3679235802464
+
+done time  166  reward:  253.95584910837982
+
+done time  167  reward:  15.255031975150104
+
+done time  168  reward:  246.9198932678408
+
+done time  169  reward:  22.376784436877344
+
+done time  170  reward:  228.2648206509478
+
+done time  171  reward:  241.47432334511686
+
+done time  172  reward:  63.14544883569616
+
+done time  173  reward:  266.18726333405704
+
+done time  174  reward:  244.330101002732
+
+done time  175  reward:  220.54290019396686
+
+done time  176  reward:  272.3408282016067
+
+done time  177  reward:  263.1067933336417
+
+done time  178  reward:  66.10759149163806
+
+done time  179  reward:  235.69183870672862
+
+done time  180  reward:  210.5250092396668
+
+done time  181  reward:  256.9039472239301
+
+done time  182  reward:  235.17003747326484
+
+done time  183  reward:  252.30942874697124
+
+done time  184  reward:  248.70012237833933
+
+done time  185  reward:  231.72400732870756
+
+done time  186  reward:  -108.53101011735217
+
+done time  187  reward:  253.94395753444385
+
+done time  188  reward:  272.15733736156
+
+done time  189  reward:  266.73772858562126
+
+done time  190  reward:  312.97563204616057
+
+done time  191  reward:  245.83294930284927
+
+done time  192  reward:  238.10732999137772
+
+done time  193  reward:  15.39706415723424
+
+done time  194  reward:  255.39045492772607
+
+done time  195  reward:  125.27745560675356
+
+done time  196  reward:  243.9599453494235
+
+done time  197  reward:  242.85755146981995
+
+done time  198  reward:  13.908446805366196
+
+done time  199  reward:  247.24484008520002
+testing end
+Average Reward:  169.9210785743288

@@ -147,6 +147,7 @@ if __name__ == "__main__":
     ENV_NAME = 'LunarLander-v2'
     BATCH_SIZE = 128 
     UPDATES = 3000 #number of training sessions (updates) in total. 
+    TEST_TIME = 200
 
     # init env and agent. 
     logging.getLogger().setLevel(logging.INFO)
@@ -162,7 +163,7 @@ if __name__ == "__main__":
     episode_reward_lst = [0.0]
     next_state = env.reset()
 
-    # initialize model structure 
+    # initialize model structure / layers
     for update in range(1):
         #gather BATCH_SIZE trajectories (SARS' paris)
         for step in range(1):
@@ -183,12 +184,8 @@ if __name__ == "__main__":
     state_values  = np.zeros(BATCH_SIZE)
     episode_reward_lst = [0.0]
     next_state = env.reset()
-    n = 0
-    while True:
-        print("hehe")
-        if n==0:
-            break
-
+    
+    n = 0 # episode numbers
     while True:
         for step in range(128):
             states[step] = next_state.copy()
@@ -199,24 +196,21 @@ if __name__ == "__main__":
             next_state, rewards[step], dones[step], _ = env.step(actions[step])
             # print(rewards[step])
             episode_reward_lst[-1] += rewards[step]
-            # print(actions[step])
-            # print(env.step(actions[step]))
+
             if dones[step]:
-                print("done")
-                print(episode_reward_lst[-1], " ", dones[step])
-                print(env.step(actions[step]))
+                print()
+                print("done time ", n ," reward: ", episode_reward_lst[-1])
                 episode_reward_lst.append(0.0)
                 next_state = env.reset()
                 n+=1
-                print("end time ", n)
                 break 
-        if n>5:
-            print("end") 
+        if n==TEST_TIME:
+            print("testing end") 
             break
 
-        
-    #make simple moving average over 50 episodes (smoothing) and plot
-    # SMA_rewards = np.convolve(episode_reward_lst, mode='valid')
+    del episode_reward_lst[-1]
+    print("Average Reward: ", np.mean(episode_reward_lst))
+    # plot reward
     plt.style.use('seaborn')
     plt.plot(episode_reward_lst)
     plt.xlabel('Episode')
