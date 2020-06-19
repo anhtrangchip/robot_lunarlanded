@@ -1,6 +1,9 @@
-"""This is another TF2.0 Keras implementation of a A2C agent (tested for openai lunar lander v2)
-In this version, a very different model definition was used employing a Keras.Model subclass.
-The idea is from: https://medium.com/@Inoryy/deep-reinforcement-learning-with-tensorflow-2-0-d8e62102680d
+""" 
+Nhóm 6:
+An implentation of A2C for Lunar lander.
+
+Các đoạn code dưới đây đã được comment và viết như tutorial.
+Đọc code từ hàm main.
 """
 #%%
 import numpy as np
@@ -28,7 +31,7 @@ class Model(tf.keras.Model):
         self.actor = kl.Dense(num_action,name='actor_logits') # aka policy
 
 
-    def call(self,inputs):
+    def call(self,inputs): # the same as forward function in Pytorch.
         """This defines the forward pass in a keras model.
         The return of call are the outputs (but model.outputs can't be called when defining
         a model via subclassing). So this model has one input(states) and two outputs (actor and critc)
@@ -39,7 +42,7 @@ class Model(tf.keras.Model):
         hidden_critic = self.hidden_critic(x)
         #the return here is equivalent to "outputs = " param in tf.keras.Model() method
 
-	# actor and critic are 2 NN models, each one has 3 layers with one 128 node-hidden layer.
+	    # actor and critic are 2 NN models, each one has 3 layers with one 128 node-hidden layer.
         return self.actor(hidden_actor), self.critic(hidden_critic)
         
     
@@ -61,7 +64,7 @@ class Model(tf.keras.Model):
     
     
 
-class A2CAgent:
+class A2CAgent: 
     def __init__(self,num_actions):
         self.GAMMA = 0.99
         self.VALUE_LOSS_FACTOR = 0.5
@@ -109,7 +112,7 @@ class A2CAgent:
         returns = returns[:-1]
 
         #advantages are the returns - the esimated value of the state (critic)
-	# In our group report : Q - returns, state_values - V.
+	    # In our group report : Q - returns, state_values - V.
         advantages = returns - state_values        
         return returns,advantages   # each one has shape: (128,)
     
@@ -180,8 +183,6 @@ if __name__ == "__main__":
     UPDATES = 3000 #number of training sessions (updates) in total. 
     RENDER_EVERY = 20 # render every nth episode
     SAVE_EVERY = 200 # save model every nth episode
-    print("BATCH_SIZE = 128 ")
-    print("UPDATES = 3000")
 
     #init env and agent. 
     logging.getLogger().setLevel(logging.INFO)
@@ -199,9 +200,15 @@ if __name__ == "__main__":
     #loop though N training steps
     for update in range(UPDATES):
         #gather BATCH_SIZE trajectories (SARS' paris)
+
+        # Run BATCH_SIZE=128 steps below to create input for Lunar lander to learn.
         for step in range(BATCH_SIZE):
             states[step] = next_state.copy()
+            
+            # Lunar lander makes predition : 
             actions[step], state_values[step] = agent.get_action_value(next_state[None, :])   # return action, critic value
+            
+            # Render to window :
             if len(episode_reward_lst) % RENDER_EVERY == 0: 
                 env.render()
                 #save gif file
@@ -223,6 +230,7 @@ if __name__ == "__main__":
                 agent.model.save('model/sub_model_'+str(len(episode_reward_lst)-1))
                 agent.model.save_weights('model/sub_model_weight_'+str(len(episode_reward_lst)-1)+'.h5')
                 
+            # gym env returns state, reward, done for Lunar lander's action.                
             next_state, rewards[step], dones[step], _ = env.step(actions[step])
             episode_reward_lst[-1] += rewards[step]
             if dones[step]:
@@ -231,6 +239,19 @@ if __name__ == "__main__":
                 next_state = env.reset()
                 if len(episode_reward_lst) % 10 == 0:
                     logging.info(f"Episode: {len(episode_reward_lst)-1}, Reward: {np.mean(episode_reward_lst[-12:-2])}, UPDATE: {update}, Step: {step}")
+        
+        # After BATCH_SIZE=128 steps, Lunar lander starts training
+        ''' 
+        128 = BATCH_SIZE
+        input : a list of 128 states ( param: states, each state has 8 components)
+                a list of 128 state values (param: state_values, correspoding with agent's critic of those states)
+                a list of 128 actions ( param: actions; action is numbered indicating: left, right,...)
+                a list of 128 rewards (param: rewards, each reward is returned by gym env for Lunar lander's action)
+                a list of 128 done (param: dones, each done is bool var indicating the end of episode)
+                the next state ( param: next_state)
+        output:
+            Training 2 neural networks inside agent so that agent can make better decision (action) next time.                
+        '''
         agent.train(states, state_values,actions,rewards,dones,next_state)
                
 
