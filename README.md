@@ -11,8 +11,7 @@ A2C model :
 	Number of training sessions (updates) in total = 3000
 	Critic model / Actor model: Neural network with 1 hidden layer having 128 nodes.
 
-Model is trained in a2c_tf2.py and tested in test_weight.py (still incomplete for several testing)
-Video demo for testing 1-play: 
+Model is trained by a2c_tf2.py and tested by test_weight.py 
 
 We develop our code base from this: 
 https://github.com/nric/A2C_TF2.0_Keras_LunarLander?fbclid=IwAR381pMtQAlKqIPKIkEHal0F86jUZYZl_J1jTnGWWGMZdlXlGSj7K48II20
