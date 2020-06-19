@@ -23,9 +23,9 @@ class Model(tf.keras.Model):
     def __init__(self,num_action):
         super().__init__('mlp_policy')
         self.hidden_critic = kl.Dense(128,activation='relu')
-        self.critic = kl.Dense(1,name='critic_logits') #aka value
+        self.critic = kl.Dense(1,name='critic_logits') # aka value
         self.hidden_actor = kl.Dense(128,activation='relu')
-        self.actor = kl.Dense(num_action,name='actor_logits') #aka policy
+        self.actor = kl.Dense(num_action,name='actor_logits') # aka policy
 
 
     def call(self,inputs):
@@ -38,7 +38,10 @@ class Model(tf.keras.Model):
         hidden_actor = self.hidden_actor(x)
         hidden_critic = self.hidden_critic(x)
         #the return here is equivalent to "outputs = " param in tf.keras.Model() method
+
+	# actor and critic are 2 NN models, each one has 3 layers with one 128 node-hidden layer.
         return self.actor(hidden_actor), self.critic(hidden_critic)
+        
     
 
     def get_action_value(self, state):
@@ -53,7 +56,7 @@ class Model(tf.keras.Model):
         actor,critic = self.predict(state)
         #from the actor logits get the action
         action = tf.random.categorical(actor, 1) #for eager mode only
-        return np.squeeze(action,axis=-1), np.squeeze(critic,axis=-1)
+        return np.squeeze(action,axis=-1), np.squeeze(critic,axis=-1) 
 
     
     
@@ -64,7 +67,7 @@ class A2CAgent:
         self.VALUE_LOSS_FACTOR = 0.5
         self.ENTROPY_FACTOR = 0.0001
         self.LEARNING_RATE = 0.001
-        self.num_actions = num_actions
+        self.num_actions = num_actions   # 4 actions
         
         self.model = Model(num_action = self.num_actions)
         self.model.compile(
@@ -104,9 +107,11 @@ class A2CAgent:
         for t in reversed(range(len(rewards))):
             returns[t] = rewards[t] + self.GAMMA * returns[t+1] * (1-dones[t])
         returns = returns[:-1]
+
         #advantages are the returns - the esimated value of the state (critic)
-        advantages = returns - state_values
-        return returns,advantages
+	# In our group report : Q - returns, state_values - V.
+        advantages = returns - state_values        
+        return returns,advantages   # each one has shape: (128,)
     
 
     def _critic_loss(self,returns,critic_logits):
@@ -116,7 +121,7 @@ class A2CAgent:
         In this case, the y_true is returns and the y_pred is the predicted value which
         is given by the critic logits.
         """
-        return self.VALUE_LOSS_FACTOR * kls.mean_squared_error(returns,critic_logits)
+        return self.VALUE_LOSS_FACTOR * kls.mean_squared_error(returns,critic_logits)  # critic_logits has shape of (128,)
     
 
     def _actor_loss(self, acts_and_advs, actor_logits):
@@ -181,10 +186,10 @@ if __name__ == "__main__":
     #init env and agent. 
     logging.getLogger().setLevel(logging.INFO)
     env = gym.make(ENV_NAME)
-    agent = A2CAgent(env.action_space.n)
+    agent = A2CAgent(env.action_space.n)  # 4 actions
 
     #init variabls for the training loops
-    states  = np.zeros((BATCH_SIZE, env.observation_space.shape[0])) # 
+    states  = np.zeros((BATCH_SIZE, env.observation_space.shape[0])) # shape: (128, 8)
     actions = np.zeros(BATCH_SIZE, dtype=np.int32)
     rewards = np.zeros(BATCH_SIZE)
     dones   = np.zeros(BATCH_SIZE)
@@ -196,7 +201,7 @@ if __name__ == "__main__":
         #gather BATCH_SIZE trajectories (SARS' paris)
         for step in range(BATCH_SIZE):
             states[step] = next_state.copy()
-            actions[step], state_values[step] = agent.get_action_value(next_state[None, :])
+            actions[step], state_values[step] = agent.get_action_value(next_state[None, :])   # return action, critic value
             if len(episode_reward_lst) % RENDER_EVERY == 0: 
                 env.render()
                 #save gif file
