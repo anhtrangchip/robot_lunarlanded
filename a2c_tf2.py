@@ -227,7 +227,7 @@ if __name__ == "__main__":
 
             #save model
             if len(episode_reward_lst) % SAVE_EVERY == 0:
-                agent.model.save('model/sub_model_'+str(len(episode_reward_lst)-1))
+                # agent.model.save('model/sub_model_'+str(len(episode_reward_lst)-1))
                 agent.model.save_weights('model/sub_model_weight_'+str(len(episode_reward_lst)-1)+'.h5')
                 
             # gym env returns state, reward, done for Lunar lander's action.                
@@ -255,7 +255,7 @@ if __name__ == "__main__":
         agent.train(states, state_values,actions,rewards,dones,next_state)
                
 
-    agent.model.save('final_model')
+    # agent.model.save('final_model')
     agent.model.save_weights('final_model_weight.h5')
     print("Finished training.")
     #make simple moving average over 50 episodes (smoothing) and plot
